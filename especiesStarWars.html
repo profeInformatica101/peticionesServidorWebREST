@@ -1,1 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Especies StarWars</title>
+</head>
+<body>
+    <script>
+//Creamos un Objeto Javascript para peticiones usando protocolo HTTP
+var httpObjet = new XMLHttpRequest()
 
+//Creamos la petición al HOST usando un verbo GET del protocolo HTTP
+httpObjet.open("GET", "https://swapi.dev/api/species/", false)
+//Ejecutamos 
+httpObjet.send(null) 
+
+//Vemos el resultado. Texto en formato JSON
+httpObjet.responseText 
+
+//Vemos el tipo de dato obtenido
+typeof httpObjet.responseText 
+
+jsonSpecies = JSON.parse(httpObjet.responseText); 
+
+//Mostrar los resultados    
+console.log(jsonSpecies.results )
+
+//Ver el nombre de las especies de Starwars
+jsonSpecies.results.forEach(function(result){ console.log(result.name); });
+
+//Añadimos HTML
+document.write("<div id='divid'>En este elemento creado copiaremos nuestra lista con formato HTML</div>");
+
+
+
+//Creamos lista HTML: Recorremos objeto JSON con los resultados
+var listaHTML="";
+listaHTML = listaHTML + "<ol>";
+jsonSpecies.results.forEach(function(result){  listaHTML = listaHTML + "<li>" + result.name + "</li>";  });
+listaHTML = listaHTML + "</ol>";
+
+
+document.getElementById('divid').innerHTML = listaHTML;
+
+    </script>
+</body>
+</html>
